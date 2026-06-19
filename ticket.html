@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Ticket Confirmation</title>
+
+<link rel="stylesheet"
+href="style.css">
+
+</head>
+
+<body>
+
+<div class="hero">
+
+<div class="booking-box">
+
+<h2>
+🎫 Ticket Confirmed
+</h2>
+
+<br>
+
+<div style="color:white; line-height:40px;">
+
+<p>
+Passenger Name :
+<span id="passengerName"></span>
+</p>
+
+<p>
+Train : Chennai Express
+</p>
+
+<p>
+Seat Number : S1 - 12
+</p>
+
+<p>
+Status : Confirmed ✅
+</p>
+
+<p>
+Journey Date : 20/06/2026
+</p>
+
+<br>
+
+<button type="button"
+onclick="downloadTicket()">
+
+Download Ticket
+
+</button>
+
+<br><br>
+
+<a href="index.html">
+
+<button type="button">
+
+Back To Home
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("passengerName").innerText =
+localStorage.getItem("passengerName");
+
+async function downloadTicket(){
+
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF();
+
+    doc.text("IRCTC Railway Ticket", 20, 20);
+
+    doc.text(
+        "Passenger Name: " +
+        localStorage.getItem("passengerName"),
+        20,
+        40
+    );
+
+    doc.text("Train: Chennai Express", 20, 60);
+
+    doc.text("Seat Number: S1 - 12", 20, 80);
+
+    doc.text("Status: Confirmed", 20, 100);
+
+    doc.save("Railway_Ticket.pdf");
+
+}
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</body>
+
+</html>
+}
+
+</script>
+
+</body>
+
+</html>
