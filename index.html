@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>IRCTC Railway Reservation</title>
+
+    <link rel="stylesheet"
+    href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+
+            🚆 IRCTC Railway
+
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="register.html">
+                    Register
+                </a>
+            </li>
+
+            <li>
+                <a href="booking.html">
+                    Book Ticket
+                </a>
+            </li>
+
+            <li>
+                <a href="ticket.html">
+                    My Ticket
+                </a>
+            </li>
+
+            <li>
+                 <a href="cancel.html">
+                    Cancel Ticket
+                 </a>
+            </li>
+
+            <li>
+                <a href="admin.html">
+                    Admin Dashboard
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="overlay"></div>
+
+        <div class="main-content">
+
+            <!-- LEFT -->
+
+            <div class="left">
+
+                <h1>
+                    BOOK TRAIN TICKETS ONLINE
+                </h1>
+
+                <p>
+                    Easy railway ticket booking system
+                    with seat availability, waiting list,
+                    cancellation and PDF ticket.
+                </p>
+
+            </div>
+
+            <!-- RIGHT BOOKING BOX -->
+
+            <div class="booking-box">
+
+                <h2>
+                    Quick Book
+                </h2>
+
+                <form id="bookingForm">
+<form id="bookingForm">
+
+    <select id="from" required>
+
+        <option value="">From Station</option>
+
+        <option>Chennai</option>
+        <option>Madurai</option>
+        <option>Coimbatore</option>
+        <option>Trichy</option>
+        <option>Salem</option>
+        <option>Erode</option>
+        <option>Tirunelveli</option>
+        <option>Thoothukudi</option>
+
+    </select>
+
+    <select id="to" required>
+
+        <option value="">To Station</option>
+
+        <option>Chennai</option>
+        <option>Madurai</option>
+        <option>Coimbatore</option>
+        <option>Trichy</option>
+        <option>Salem</option>
+        <option>Erode</option>
+        <option>Tirunelveli</option>
+        <option>Thoothukudi</option>
+
+    </select>
+
+    <input type="date"
+    id="date"
+    required>
+                    
+
+                
+
+                    <select id="class">
+
+                        <option>
+                            Sleeper Class
+                        </option>
+
+                        <option>
+                            AC Class
+                        </option>
+
+                        <option>
+                            First Class
+                        </option>
+
+                    </select>
+
+                    <!-- RADIO BUTTONS -->
+
+                    <div class="radio-box">
+
+                        <label>
+
+                            <input type="radio"
+                            name="ticket"
+                            checked>
+
+                            General
+
+                        </label>
+
+                        <label>
+
+                            <input type="radio"
+                            name="ticket">
+
+                            Tatkal
+
+                        </label>
+
+                    </div>
+
+                    <!-- BUTTON -->
+
+                    <button type="button"
+                    onclick="goBooking()">
+
+                        SEARCH TRAIN
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+<!-- FIREBASE CONFIG -->
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyCz6_Gs8LAtiuubStscVOE6RWxvLcYIXTA",
+  authDomain: "railway-reservation-ad681.firebaseapp.com",
+  databaseURL:"https://railway-reservation-ad681-default-rtdb.firebaseio.com/",
+  projectId: "railway-reservation-ad681",
+  storageBucket: "railway-reservation-ad681.firebasestorage.app",
+  messagingSenderId: "182802448874",
+  appId: "1:182802448874:web:322064ebe5b217d51b3293"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+console.log("Firebase Connected ✅");
+
+</script>
+    <!-- SCRIPT -->
+
+    <script>
+
+        function goBooking(){
+
+localStorage.setItem(
+"fromStation",
+document.getElementById("from").value
+);
+
+localStorage.setItem(
+"toStation",
+document.getElementById("to").value
+);
+
+localStorage.setItem(
+"journeyDate",
+document.getElementById("date").value
+);
+localStorage.setItem(
+"trainType",
+"Express"
+);
+
+localStorage.setItem(
+"amount",
+"650"
+);
+window.location.href =
+"booking.html";
+
+}
+
+
+    </script>
+
+</body>
+
+</html>
