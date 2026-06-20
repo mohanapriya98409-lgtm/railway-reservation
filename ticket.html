@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ticket Confirmation</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="hero">
+
+<div class="booking-box">
+
+<h2>🎫 Ticket Confirmed</h2>
+
+<br>
+
+<div style="color:white; line-height:40px;">
+
+<p>
+PNR Number :
+<span id="pnr"></span>
+</p>
+
+<p>
+Passenger Name :
+<span id="name"></span>
+</p>
+
+<p>
+Train :
+<span id="train"></span>
+</p>
+
+<p>
+Seat Number :
+<span id="seat"></span>
+</p>
+
+<p>
+Status : Confirmed ✅
+</p>
+
+<br>
+
+<button onclick="downloadTicket()">
+Download Ticket
+</button>
+
+<br><br>
+
+<a href="index.html">
+<button>
+Back To Home
+</button>
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- JS PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+
+document.getElementById("pnr").innerText =
+localStorage.getItem("pnr");
+
+document.getElementById("name").innerText =
+localStorage.getItem("name") || "Guest";
+
+document.getElementById("train").innerText =
+localStorage.getItem("trainName");
+
+document.getElementById("seat").innerText =
+localStorage.getItem("seatNumber");
+
+// DOWNLOAD PDF
+async function downloadTicket(){
+
+const { jsPDF } = window.jspdf;
+
+const doc = new jsPDF();
+
+doc.text("IRCTC Railway Ticket", 20, 20);
+
+doc.text("PNR: " + localStorage.getItem("pnr"), 20, 40);
+
+doc.text("Name: " + localStorage.getItem("name"), 20, 60);
+
+doc.text("Train: " + localStorage.getItem("trainName"), 20, 80);
+
+doc.text("Seat: " + localStorage.getItem("seatNumber"), 20, 100);
+
+doc.save("Railway_Ticket.pdf");
+
+}
+
+</script>
+
+</body>
+</html>
