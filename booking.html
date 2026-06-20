@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Train Search</title>
+
+<link rel="stylesheet"
+href="style.css">
+
+</head>
+
+<body>
+
+<div class="hero">
+
+<div class="booking-box">
+
+<h2>
+Available Trains 🚆
+</h2>
+
+<br>
+
+<div style="color:white">
+
+<h3>
+Chennai Express
+</h3>
+
+<p>
+Departure : 06:30 AM
+</p>
+
+<p>
+Seats Available : 120
+</p>
+
+<br>
+
+<h3>
+Madurai Super Fast
+</h3>
+
+<p>
+Departure : 09:45 AM
+</p>
+
+<p>
+Seats Available : 80
+</p>
+
+<br>
+
+<h3>
+Coimbatore Express
+</h3>
+
+<p>
+Departure : 11:15 AM
+</p>
+
+<p>
+Seats Available : 45
+</p>
+
+<br>
+
+<button onclick="bookNow('Chennai Express')">
+
+Book Now
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function bookNow(trainName){
+
+let pnr = "PNR" + Math.floor(Math.random() * 1000000);
+
+localStorage.setItem("trainName", trainName);
+localStorage.setItem("pnr", pnr);
+
+alert("Train Selected 🚆");
+
+window.location.href = "seat.html";
+
+}
+
+
+</script>
+
+</body>
+</html>
