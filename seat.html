@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seat Selection</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+.seat-container{
+    display:grid;
+    grid-template-columns:repeat(4,80px);
+    gap:15px;
+    justify-content:center;
+    margin-top:20px;
+}
+
+.seat{
+    width:80px;
+    height:80px;
+    background:green;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.seat:hover{
+    transform:scale(1.1);
+}
+
+.booked{
+    background:red;
+    cursor:not-allowed;
+}
+
+.selected{
+    background:orange;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+<div class="booking-box">
+
+<h2>💺 Select Your Seat</h2>
+<p style="color:white;">TEST SEAT PAGE</p>
+
+<br>
+
+<div class="train-layout">
+<div class="berth-group">
+<button class="seat">LB</button>
+<button class="seat">MB</button>
+<button class="seat">UB</button>
+</div>
+
+<div class="side-berth">
+<button class="seat">SL</button>
+<button class="seat booked">SU</button>
+</div>
+
+<div class="berth-group">
+<button class="seat">LB</button>
+<button class="seat booked">MB</button>
+<button class="seat">UB</button>
+</div>
+
+<div class="side-berth">
+<button class="seat">SL</button>
+<button class="seat">SU</button>
+</div>
+</div>
+
+<br><br>
+
+<button onclick="continueBooking()">
+Continue Booking
+</button>
+
+</div>
+</div>
+
+<script type="module">
+
+// 🔥 FIREBASE IMPORT
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+// 🔥 CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyCz6_Gs8LAtiuubStscVOE6RWxvLcYIXTA",
+  authDomain: "railway-reservation-ad681.firebaseapp.com",
+  databaseURL:"https://railway-reservation-ad681-default-rtdb.firebaseio.com/",
+  projectId: "railway-reservation-ad681",
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+// seat selection
+const seats = document.querySelectorAll(".seat");
+
+seats.forEach(seat => {
+seat.addEventListener("click", () => {
+
+if(seat.classList.contains("booked")){
+    alert("Seat Already Booked ❌");
+    return;
+}
+
+document.querySelectorAll(".seat")
+.forEach(s => s.classList.remove("selected"));
+
+seat.classList.add("selected");
+
+alert(seat.innerText + " Selected ✅");
+
+});
+});
+
+// 🔥 FINAL BOOKING FUNCTION
+function continueBooking(){
+
+const selectedSeat = document.querySelector(".seat.selected");
+
+if(!selectedSeat){
+    alert("Please select a seat ❌");
+    return;
+}
+
+let seat = selectedSeat.innerText;
+let train = localStorage.getItem("trainName");
+let pnr = localStorage.getItem("pnr");
+
+let name = localStorage.getItem("name")
+let phone = localStorage.getItem("phone") || "0000000000";
+let email = localStorage.getItem("email") || "test@mail.com";
+
+localStorage.setItem("seatNumber", seat);
+update(ref(database, "bookings/" + pnr), {
+    seat: seat,
+    train: train,
+    name: name,
+    phone: phone,
+    email: email,
+    status: "Booked"
+});
+
+alert("Booking Confirmed 🚆 Seat: " + seat);
+
+window.location.href = "waitlist.html";
+}
+
+// make function global
+window.continueBooking = continueBooking;
+
+</script>
+
+</body>
+</html>
